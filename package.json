@@ -1,0 +1,19 @@
+{
+    "name": "spotify-bot",
+    "version": "1.0.0",
+    "description": "Tracks changes in Spotify playlists and sends notifications via Telegram",
+    "main": "playlist-tracker.js",
+    "type": "module",
+    "scripts": {
+        "start": "node server.js",
+        "bot": "node telegram-bot.js",
+        "check": "node playlist-tracker.js"
+    },
+    "dependencies": {
+        "axios": "^1.8.3",
+        "dotenv": "^16.4.7",
+        "express": "^4.18.2",
+        "moment-timezone": "^0.5.47",
+        "telegraf": "^4.16.3"
+    }
+}
