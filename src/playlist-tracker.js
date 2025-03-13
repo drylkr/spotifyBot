@@ -101,8 +101,6 @@ async function checkForSongChanges() {
         fs.writeFileSync(SONGS_FILE, JSON.stringify(storedSongs, null, 2));
     }
 
-    let changesMade = false; // Track if any changes were found
-
     for (const playlist of playlists) {
         const data = await getPlaylistTracks(playlist.id, token);
         if (!data) continue;
@@ -179,7 +177,6 @@ async function checkForSongChanges() {
 
         if (newTracks.length > 0) {
             // Log added songs
-            changesMade = true;
             newTracks.forEach((track) => {
                 console.log(`Added: ${track.name} (ID: ${track.id})`);
             });
@@ -199,13 +196,6 @@ async function checkForSongChanges() {
 
         // Update stored tracks with current playlist state
         storedSongs[playlist.id].ids = trackIds;
-    }
-
-    // After processing all playlists, check if any changes were made
-    if (!changesMade) {
-        const message = `No changes detected\n_${escapeMarkdown(getTimestamp())}_`;
-        await sendTelegramMessage(message, config.telegramBotToken, config.telegramChatId);
-        console.log(`[${escapeMarkdown(getTimestamp())}] No changes detected, bot sent status message.`);
     }
     
     // Save updated data
