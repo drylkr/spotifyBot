@@ -9,12 +9,20 @@ export async function sendTelegramMessage(message, telegramToken, telegramChatId
     try {
         const messageChunks = splitMessageBySong(message, MAX_MESSAGE_LENGTH);
 
+        // If only one part, send without the "Part X" label
         for (const [index, chunk] of messageChunks.entries()) {
-            const escapedChunk = escapeMarkdown(chunk); 
+            const escapedChunk = escapeMarkdown(chunk);
+
+            let textToSend = escapedChunk;
+
+            // Add "Part X" label only if there are multiple parts
+            if (messageChunks.length > 1) {
+                textToSend = `*Part ${index + 1}/${messageChunks.length}:*\n\n${escapedChunk}`;
+            }
 
             await axios.post(url, {
                 chat_id: telegramChatId,
-                text: `*Part ${index + 1}/${messageChunks.length}:*\n\n${escapedChunk}`,
+                text: textToSend,
                 parse_mode: "MarkdownV2",
                 disable_web_page_preview: true
             });
