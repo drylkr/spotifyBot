@@ -7,11 +7,8 @@
       "2bqLj0NvdtGbPCl9PdBtP2",
       "49QEJdbU9mf4VUXReOpZ9u",
       "6EwF4tB3uiI2Xq02FCS9DF",
-      "3URe1bi21ftFK4zh5nO1P1",
-      "04sN26COy28wTXYj3dMoiZ",
       "1RGasjWLZ4qMN7wbtkLa3u",
       "3GYlZ7tbxLOxe6ewMNVTkw",
-      "30jui3PqevssdIVpjEWM38",
       "0D2m3GX6mNfNB6dKJQjCgM",
       "3RpwjGzgb8QAuOnZbdDZZs",
       "10nyNJ6zNy2YVYLrcwLccB",
@@ -25,7 +22,6 @@
       "4hmKjNGjQhSQPRIbvR8yZx",
       "2vs1BE8VC5NRm2IKjxFNOn",
       "0F57gwy0G6aqnaMAH1ELSV",
-      "2xPwIWxwkIsPozlLilBdDd",
       "7ihdRO2KCtgmx2T7y4USj2"
     ],
     "trackDetails": {
@@ -65,18 +61,6 @@
         "added_at": "2025-03-11T07:08:56Z",
         "url": "https://open.spotify.com/track/6EwF4tB3uiI2Xq02FCS9DF"
       },
-      "3URe1bi21ftFK4zh5nO1P1": {
-        "name": "sunny days",
-        "artist": "wave to earth",
-        "added_at": "2025-03-11T07:08:59Z",
-        "url": "https://open.spotify.com/track/3URe1bi21ftFK4zh5nO1P1"
-      },
-      "04sN26COy28wTXYj3dMoiZ": {
-        "name": "Bored",
-        "artist": "Billie Eilish",
-        "added_at": "2025-03-11T07:09:06Z",
-        "url": "https://open.spotify.com/track/04sN26COy28wTXYj3dMoiZ"
-      },
       "1RGasjWLZ4qMN7wbtkLa3u": {
         "name": "my boy",
         "artist": "Billie Eilish",
@@ -88,12 +72,6 @@
         "artist": "Billie Eilish",
         "added_at": "2025-03-11T07:09:14Z",
         "url": "https://open.spotify.com/track/3GYlZ7tbxLOxe6ewMNVTkw"
-      },
-      "30jui3PqevssdIVpjEWM38": {
-        "name": "Is there free breakfast here?",
-        "artist": "Hotel Ugly",
-        "added_at": "2025-03-11T07:09:21Z",
-        "url": "https://open.spotify.com/track/30jui3PqevssdIVpjEWM38"
       },
       "0D2m3GX6mNfNB6dKJQjCgM": {
         "name": "Take Care",
@@ -172,12 +150,6 @@
         "artist": "Ūla",
         "added_at": "2025-03-11T07:11:50Z",
         "url": "https://open.spotify.com/track/0F57gwy0G6aqnaMAH1ELSV"
-      },
-      "2xPwIWxwkIsPozlLilBdDd": {
-        "name": "sneakers",
-        "artist": "Camille Cano",
-        "added_at": "2025-03-13T06:35:01Z",
-        "url": "https://open.spotify.com/track/2xPwIWxwkIsPozlLilBdDd"
       },
       "7ihdRO2KCtgmx2T7y4USj2": {
         "name": "LOVE CAN WAIT",
