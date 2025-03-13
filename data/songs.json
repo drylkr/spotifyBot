@@ -1,79 +1,39 @@
 {
   "3iZsYibIFF1lxY13nBiFjE": {
     "ids": [
-      "2P6YMsU9jt22CXfizfudi3",
       "5xEM5hIgJ1jjgcEBfpkt2F",
-      "5cn4RhNZPPjt0onhqUMEfa",
       "5uDuOnjJ0MrfJxvEHPpJap",
-      "4iZ4pt7kvcaH6Yo8UoZ4s2",
       "7eAbqNTbUidZNkl8BDEQ9K",
-      "3siwsiaEoU4Kuuc9WKMUy5",
       "2bqLj0NvdtGbPCl9PdBtP2",
       "49QEJdbU9mf4VUXReOpZ9u",
-      "45J4avUb9Ni0bnETYaYFVJ",
       "6EwF4tB3uiI2Xq02FCS9DF",
       "3URe1bi21ftFK4zh5nO1P1",
-      "541sN2qNfIlllGn9nGOQoC",
       "04sN26COy28wTXYj3dMoiZ",
       "1RGasjWLZ4qMN7wbtkLa3u",
       "3GYlZ7tbxLOxe6ewMNVTkw",
-      "0tMSssfxAL2oV8Vri0mFHE",
       "30jui3PqevssdIVpjEWM38",
-      "4qyXiEXiOfSxqn3YrY0NKW",
       "0D2m3GX6mNfNB6dKJQjCgM",
       "3RpwjGzgb8QAuOnZbdDZZs",
       "10nyNJ6zNy2YVYLrcwLccB",
       "6IRbgdEASa9M0ECGd6UNhB",
       "4rHZZAmHpZrA3iH5zx8frV",
-      "0L1IszgjzIZRBENyHJTQms",
       "4qu63nuBpdn0qHUHuObEj1",
-      "50PyquzZ9BaBwLZZd1AuuV",
-      "7DfFc7a6Rwfi3YQMRbDMau",
       "2zOmS55knKWSgScYPTNmGQ",
       "1Cbl3Yq8rHo7hhDQmLQagU",
-      "3xKsf9qdS1CyvXSMEid6g8",
-      "6qL5UWxRSQYml9O99ozoLv",
-      "7l9IqDtVWJurTvkQHq1BGh",
       "6pERLwGg6WN0MvQ7YujWsG",
       "3eZReaCGyJoXQvXCN9HuG9",
       "4hmKjNGjQhSQPRIbvR8yZx",
       "2vs1BE8VC5NRm2IKjxFNOn",
       "0F57gwy0G6aqnaMAH1ELSV",
-      "1rCmfofJ9KFfceGLsJCTLf",
       "2xPwIWxwkIsPozlLilBdDd",
-      "4zaLAS8k38OrOzcixofzwj",
-      "5TAF0A7kjWTl1JC6RvCssZ",
-      "08nrzCkBXEIgocYj0OxpeU",
-      "4hBYbqrCcUoAheqSkTVRrn",
-      "115YgPeqZ5CrpJItttwfVO",
-      "7ihdRO2KCtgmx2T7y4USj2",
-      "12omGhigKrsjfVJpjEO4V3",
-      "6z9zXftDgpnyZYL2KiRTHZ",
-      "6UVRuALsY1Q9THdXLouEUe",
-      "0ePc8Rih4qNgRXvhLHIgx4",
-      "2AE32n5CodWEA0YDIC6ou7",
-      "6LCSYQNqqXMVNWPoc2q8UE",
-      "76RVMGUn5zpjDcLETRDgeJ",
-      "1B2zrooBJ6Rc8NIUuS3VDh"
+      "7ihdRO2KCtgmx2T7y4USj2"
     ],
     "trackDetails": {
-      "2P6YMsU9jt22CXfizfudi3": {
-        "name": "Love Hangover (feat. Dominic Fike)",
-        "artist": "JENNIE, Dominic Fike",
-        "added_at": "2025-03-11T07:07:52Z",
-        "url": "https://open.spotify.com/track/2P6YMsU9jt22CXfizfudi3"
-      },
       "5xEM5hIgJ1jjgcEBfpkt2F": {
         "name": "Complicated",
         "artist": "Avril Lavigne",
         "added_at": "2025-03-11T07:08:04Z",
         "url": "https://open.spotify.com/track/5xEM5hIgJ1jjgcEBfpkt2F"
-      },
-      "5cn4RhNZPPjt0onhqUMEfa": {
-        "name": "Change Me",
-        "artist": "Justin Bieber",
-        "added_at": "2025-03-11T07:08:16Z",
-        "url": "https://open.spotify.com/track/5cn4RhNZPPjt0onhqUMEfa"
       },
       "5uDuOnjJ0MrfJxvEHPpJap": {
         "name": "Catching Feelings",
@@ -81,23 +41,11 @@
         "added_at": "2025-03-11T07:08:27Z",
         "url": "https://open.spotify.com/track/5uDuOnjJ0MrfJxvEHPpJap"
       },
-      "4iZ4pt7kvcaH6Yo8UoZ4s2": {
-        "name": "Snooze",
-        "artist": "SZA",
-        "added_at": "2025-03-11T07:08:30Z",
-        "url": "https://open.spotify.com/track/4iZ4pt7kvcaH6Yo8UoZ4s2"
-      },
       "7eAbqNTbUidZNkl8BDEQ9K": {
         "name": "i saw you in a dream",
         "artist": "The Japanese House",
         "added_at": "2025-03-11T07:08:38Z",
         "url": "https://open.spotify.com/track/7eAbqNTbUidZNkl8BDEQ9K"
-      },
-      "3siwsiaEoU4Kuuc9WKMUy5": {
-        "name": "No One Noticed",
-        "artist": "The Marías",
-        "added_at": "2025-03-11T07:08:41Z",
-        "url": "https://open.spotify.com/track/3siwsiaEoU4Kuuc9WKMUy5"
       },
       "2bqLj0NvdtGbPCl9PdBtP2": {
         "name": "Purple lace bra",
@@ -111,12 +59,6 @@
         "added_at": "2025-03-11T07:08:49Z",
         "url": "https://open.spotify.com/track/49QEJdbU9mf4VUXReOpZ9u"
       },
-      "45J4avUb9Ni0bnETYaYFVJ": {
-        "name": "luther (with sza)",
-        "artist": "Kendrick Lamar, SZA",
-        "added_at": "2025-03-11T07:08:52Z",
-        "url": "https://open.spotify.com/track/45J4avUb9Ni0bnETYaYFVJ"
-      },
       "6EwF4tB3uiI2Xq02FCS9DF": {
         "name": "Thank You For Everything",
         "artist": "Diego Gonzalez",
@@ -128,12 +70,6 @@
         "artist": "wave to earth",
         "added_at": "2025-03-11T07:08:59Z",
         "url": "https://open.spotify.com/track/3URe1bi21ftFK4zh5nO1P1"
-      },
-      "541sN2qNfIlllGn9nGOQoC": {
-        "name": "Revolving door",
-        "artist": "Tate McRae",
-        "added_at": "2025-03-11T07:09:03Z",
-        "url": "https://open.spotify.com/track/541sN2qNfIlllGn9nGOQoC"
       },
       "04sN26COy28wTXYj3dMoiZ": {
         "name": "Bored",
@@ -153,23 +89,11 @@
         "added_at": "2025-03-11T07:09:14Z",
         "url": "https://open.spotify.com/track/3GYlZ7tbxLOxe6ewMNVTkw"
       },
-      "0tMSssfxAL2oV8Vri0mFHE": {
-        "name": "listen before i go",
-        "artist": "Billie Eilish",
-        "added_at": "2025-03-11T07:09:17Z",
-        "url": "https://open.spotify.com/track/0tMSssfxAL2oV8Vri0mFHE"
-      },
       "30jui3PqevssdIVpjEWM38": {
         "name": "Is there free breakfast here?",
         "artist": "Hotel Ugly",
         "added_at": "2025-03-11T07:09:21Z",
         "url": "https://open.spotify.com/track/30jui3PqevssdIVpjEWM38"
-      },
-      "4qyXiEXiOfSxqn3YrY0NKW": {
-        "name": "Yacht (feat. Vic Mensa)",
-        "artist": "Jay Park, VIC MENSA",
-        "added_at": "2025-03-11T07:09:25Z",
-        "url": "https://open.spotify.com/track/4qyXiEXiOfSxqn3YrY0NKW"
       },
       "0D2m3GX6mNfNB6dKJQjCgM": {
         "name": "Take Care",
@@ -201,29 +125,11 @@
         "added_at": "2025-03-11T07:09:59Z",
         "url": "https://open.spotify.com/track/4rHZZAmHpZrA3iH5zx8frV"
       },
-      "0L1IszgjzIZRBENyHJTQms": {
-        "name": "Dear Society",
-        "artist": "Madison Beer",
-        "added_at": "2025-03-11T07:10:08Z",
-        "url": "https://open.spotify.com/track/0L1IszgjzIZRBENyHJTQms"
-      },
       "4qu63nuBpdn0qHUHuObEj1": {
         "name": "Leave Before You Love Me (with Jonas Brothers)",
         "artist": "Marshmello, Jonas Brothers",
         "added_at": "2025-03-11T07:10:12Z",
         "url": "https://open.spotify.com/track/4qu63nuBpdn0qHUHuObEj1"
-      },
-      "50PyquzZ9BaBwLZZd1AuuV": {
-        "name": "Close To You",
-        "artist": "Dayglow",
-        "added_at": "2025-03-11T07:10:16Z",
-        "url": "https://open.spotify.com/track/50PyquzZ9BaBwLZZd1AuuV"
-      },
-      "7DfFc7a6Rwfi3YQMRbDMau": {
-        "name": "Thinkin Bout You",
-        "artist": "Frank Ocean",
-        "added_at": "2025-03-11T07:10:45Z",
-        "url": "https://open.spotify.com/track/7DfFc7a6Rwfi3YQMRbDMau"
       },
       "2zOmS55knKWSgScYPTNmGQ": {
         "name": "Sports car",
@@ -236,24 +142,6 @@
         "artist": "Tyla",
         "added_at": "2025-03-11T07:11:05Z",
         "url": "https://open.spotify.com/track/1Cbl3Yq8rHo7hhDQmLQagU"
-      },
-      "3xKsf9qdS1CyvXSMEid6g8": {
-        "name": "Pink + White",
-        "artist": "Frank Ocean",
-        "added_at": "2025-03-11T07:11:09Z",
-        "url": "https://open.spotify.com/track/3xKsf9qdS1CyvXSMEid6g8"
-      },
-      "6qL5UWxRSQYml9O99ozoLv": {
-        "name": "Love Songs - Bonus",
-        "artist": "Kaash Paige",
-        "added_at": "2025-03-11T07:11:14Z",
-        "url": "https://open.spotify.com/track/6qL5UWxRSQYml9O99ozoLv"
-      },
-      "7l9IqDtVWJurTvkQHq1BGh": {
-        "name": "she's all i wanna be",
-        "artist": "Tate McRae",
-        "added_at": "2025-03-11T07:11:17Z",
-        "url": "https://open.spotify.com/track/7l9IqDtVWJurTvkQHq1BGh"
       },
       "6pERLwGg6WN0MvQ7YujWsG": {
         "name": "dance partner",
@@ -285,101 +173,17 @@
         "added_at": "2025-03-11T07:11:50Z",
         "url": "https://open.spotify.com/track/0F57gwy0G6aqnaMAH1ELSV"
       },
-      "1rCmfofJ9KFfceGLsJCTLf": {
-        "name": "do u even like me",
-        "artist": "judith",
-        "added_at": "2025-03-13T05:29:46Z",
-        "url": "https://open.spotify.com/track/1rCmfofJ9KFfceGLsJCTLf"
-      },
       "2xPwIWxwkIsPozlLilBdDd": {
         "name": "sneakers",
         "artist": "Camille Cano",
         "added_at": "2025-03-13T06:35:01Z",
         "url": "https://open.spotify.com/track/2xPwIWxwkIsPozlLilBdDd"
       },
-      "4zaLAS8k38OrOzcixofzwj": {
-        "name": "strawberry cheeks",
-        "artist": "Ūla",
-        "added_at": "2025-03-13T07:14:09Z",
-        "url": "https://open.spotify.com/track/4zaLAS8k38OrOzcixofzwj"
-      },
-      "5TAF0A7kjWTl1JC6RvCssZ": {
-        "name": "Letting Go",
-        "artist": "Calica",
-        "added_at": "2025-03-13T07:27:25Z",
-        "url": "https://open.spotify.com/track/5TAF0A7kjWTl1JC6RvCssZ"
-      },
-      "08nrzCkBXEIgocYj0OxpeU": {
-        "name": "intentions",
-        "artist": "Cat & Calmell",
-        "added_at": "2025-03-13T07:32:53Z",
-        "url": "https://open.spotify.com/track/08nrzCkBXEIgocYj0OxpeU"
-      },
-      "4hBYbqrCcUoAheqSkTVRrn": {
-        "name": "Gay For A Day",
-        "artist": "FLAVIA",
-        "added_at": "2025-03-13T07:36:54Z",
-        "url": "https://open.spotify.com/track/4hBYbqrCcUoAheqSkTVRrn"
-      },
-      "115YgPeqZ5CrpJItttwfVO": {
-        "name": "JUST ME & FRIENDS",
-        "artist": "Huron John",
-        "added_at": "2025-03-13T07:37:43Z",
-        "url": "https://open.spotify.com/track/115YgPeqZ5CrpJItttwfVO"
-      },
       "7ihdRO2KCtgmx2T7y4USj2": {
         "name": "LOVE CAN WAIT",
         "artist": "Chris Pierce",
         "added_at": "2025-03-13T07:41:21Z",
         "url": "https://open.spotify.com/track/7ihdRO2KCtgmx2T7y4USj2"
-      },
-      "12omGhigKrsjfVJpjEO4V3": {
-        "name": "Peach Pit",
-        "artist": "Dance Yourself Clean",
-        "added_at": "2025-03-13T07:44:47Z",
-        "url": "https://open.spotify.com/track/12omGhigKrsjfVJpjEO4V3"
-      },
-      "6z9zXftDgpnyZYL2KiRTHZ": {
-        "name": "Manic Pixie Dream Girl",
-        "artist": "EASHA",
-        "added_at": "2025-03-13T07:51:16Z",
-        "url": "https://open.spotify.com/track/6z9zXftDgpnyZYL2KiRTHZ"
-      },
-      "6UVRuALsY1Q9THdXLouEUe": {
-        "name": "Washing Machine",
-        "artist": "VANISHING GIRL, Rosemary Fairweather",
-        "added_at": "2025-03-13T07:55:08Z",
-        "url": "https://open.spotify.com/track/6UVRuALsY1Q9THdXLouEUe"
-      },
-      "0ePc8Rih4qNgRXvhLHIgx4": {
-        "name": "Bloom",
-        "artist": "Galdive",
-        "added_at": "2025-03-13T08:15:40Z",
-        "url": "https://open.spotify.com/track/0ePc8Rih4qNgRXvhLHIgx4"
-      },
-      "2AE32n5CodWEA0YDIC6ou7": {
-        "name": "Happy As I Am",
-        "artist": "Shaqdi",
-        "added_at": "2025-03-13T08:30:04Z",
-        "url": "https://open.spotify.com/track/2AE32n5CodWEA0YDIC6ou7"
-      },
-      "6LCSYQNqqXMVNWPoc2q8UE": {
-        "name": "i do luv u",
-        "artist": "okayceci",
-        "added_at": "2025-03-13T08:38:10Z",
-        "url": "https://open.spotify.com/track/6LCSYQNqqXMVNWPoc2q8UE"
-      },
-      "76RVMGUn5zpjDcLETRDgeJ": {
-        "name": "CALONE",
-        "artist": "Tiffany Day",
-        "added_at": "2025-03-13T08:39:27Z",
-        "url": "https://open.spotify.com/track/76RVMGUn5zpjDcLETRDgeJ"
-      },
-      "1B2zrooBJ6Rc8NIUuS3VDh": {
-        "name": "Italo Disco",
-        "artist": "Last Dinosaurs",
-        "added_at": "2025-03-13T14:16:03Z",
-        "url": "https://open.spotify.com/track/1B2zrooBJ6Rc8NIUuS3VDh"
       }
     }
   }
