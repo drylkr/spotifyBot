@@ -22,7 +22,8 @@
       "4hmKjNGjQhSQPRIbvR8yZx",
       "2vs1BE8VC5NRm2IKjxFNOn",
       "0F57gwy0G6aqnaMAH1ELSV",
-      "7ihdRO2KCtgmx2T7y4USj2"
+      "7ihdRO2KCtgmx2T7y4USj2",
+      "3vUXZ0PFgUFo6LtmhPRMrg"
     ],
     "trackDetails": {
       "5xEM5hIgJ1jjgcEBfpkt2F": {
@@ -156,6 +157,12 @@
         "artist": "Chris Pierce",
         "added_at": "2025-03-13T07:41:21Z",
         "url": "https://open.spotify.com/track/7ihdRO2KCtgmx2T7y4USj2"
+      },
+      "3vUXZ0PFgUFo6LtmhPRMrg": {
+        "name": "space for you",
+        "artist": "Avenue Beat",
+        "added_at": "2025-03-14T05:39:24Z",
+        "url": "https://open.spotify.com/track/3vUXZ0PFgUFo6LtmhPRMrg"
       }
     }
   }
