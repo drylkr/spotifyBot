@@ -5,7 +5,6 @@ import { fileURLToPath } from 'url';
 import { getSpotifyToken, getPlaylistTracks } from "./services/spotifyService.js";
 import { sendTelegramMessage } from "./services/telegramService.js";
 import { getTimestamp } from './utils/timeUtils.js';
-import { escapeMarkdown } from "./utils/markdownUtils.js";
 import { config } from "./config.js";
 
 // Get the directory name using ES modules syntax
@@ -18,18 +17,18 @@ const PLAYLISTS_FILE = path.resolve(__dirname, "../data/playlists.json");
 // Format a single track for notification message
 function formatTrackMessage(track, isNew = true) {
     // Track title and artist
-    let message = `*${escapeMarkdown(track.name)}*\n`;
-    message += `${escapeMarkdown(track.artist)}\n`;
+    let message = `*${(track.name)}*\n`;
+    message += `${(track.artist)}\n`;
 
     // Add date information
     if (track.added_at) {
         const formattedDate = getTimestamp(track.added_at);
-        message += `_${escapeMarkdown(`${isNew ? "Added" : "Was added"} on ${formattedDate}`)}_\n`;
+        message += `_${(`${isNew ? "Added" : "Was added"} on ${formattedDate}`)}_\n`;
     }
     
     // Add track URL
     if (track.url) {
-        message += `[Listen on Spotify](${escapeMarkdown(track.url)})`;
+        message += `[Listen on Spotify](${(track.url)})`;
     }
 
     return message;
@@ -39,7 +38,7 @@ function formatTrackMessage(track, isNew = true) {
 function formatMessageHeader(playlistName, count, isNew = true) {
     const symbol = isNew ? "☆" : "♡";
     const action = isNew ? "Added to" : "Removed from";
-    return `${symbol} *${count} ${count === 1 ? "Song" : "Songs"} ${action} _${escapeMarkdown(playlistName)}_* ${symbol}\n`;
+    return `${symbol} *${count} ${count === 1 ? "Song" : "Songs"} ${action} _${(playlistName)}_* ${symbol}\n`;
 }
 
 // Function to check for new and removed songs
