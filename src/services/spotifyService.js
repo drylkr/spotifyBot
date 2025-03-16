@@ -40,7 +40,8 @@ export async function getPlaylistDetails(playlistId, token) {
                 name: response.data.owner?.display_name
             },
             snapshot_id: response.data.snapshot_id,
-            last_checked: new Date().toISOString()
+            last_checked: new Date().toISOString(),
+            track_count: response.data.tracks.total
         };
 
         // Extract tracks
