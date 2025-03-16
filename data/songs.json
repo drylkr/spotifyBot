@@ -22,7 +22,8 @@
       "190IqlryWu91WBKeDgZqZz",
       "01K4zKU104LyJ8gMb7227B",
       "6jTQijAuYxOd8DjQ8D6UkL",
-      "5xEM5hIgJ1jjgcEBfpkt2F"
+      "5xEM5hIgJ1jjgcEBfpkt2F",
+      "6PGoSes0D9eUDeeAafB2As"
     ],
     "trackDetails": {
       "5uDuOnjJ0MrfJxvEHPpJap": {
@@ -156,6 +157,12 @@
         "artist": "Avril Lavigne",
         "added_at": "2025-03-16T07:12:06Z",
         "url": "https://open.spotify.com/track/5xEM5hIgJ1jjgcEBfpkt2F"
+      },
+      "6PGoSes0D9eUDeeAafB2As": {
+        "name": "LOVE. FEAT. ZACARI.",
+        "artist": "Kendrick Lamar, Zacari",
+        "added_at": "2025-03-16T09:41:45Z",
+        "url": "https://open.spotify.com/track/6PGoSes0D9eUDeeAafB2As"
       }
     }
   }
