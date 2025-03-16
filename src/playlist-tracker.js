@@ -75,11 +75,23 @@ async function checkForMetadataChanges(playlistId, newMetadata, token) {
     const oldMetadata = metadata[playlistId];
     let changed = false;
 
-    // Check for metadata changes
+    // Log for debugging
+    console.log("Old metadata image:", oldMetadata.image);
+    console.log("New metadata image:", newMetadata.image);
+
+    // Track when image was last checked without modifying URLs
+    newMetadata.imageLastChecked = Date.now();
+
+    // Strip any cache-busting parameters from URLs before comparing
+    const stripParams = (url) => url ? url.split('?')[0] : url;
+    const oldImageBase = stripParams(oldMetadata.image);
+    const newImageBase = stripParams(newMetadata.image);
+
+    // Check for metadata changes (using base URLs for images)
     if (
         oldMetadata.name !== newMetadata.name ||
         oldMetadata.description !== newMetadata.description ||
-        oldMetadata.image !== newMetadata.image
+        oldImageBase !== newImageBase
     ) {
         changed = true;
         console.log(`Detected metadata changes for playlist: ${newMetadata.name}`);
@@ -91,10 +103,11 @@ async function checkForMetadataChanges(playlistId, newMetadata, token) {
         await sendTelegramMessage(message, config.telegramBotToken, config.telegramChatId);
         
         // If image changed and we have a new image, send it separately
-        if (oldMetadata.image !== newMetadata.image && newMetadata.image) {
+        if (oldImageBase !== newImageBase && newMetadata.image) {
             const caption = `New cover image for playlist: *${newMetadata.name}*`;
+            // Send the actual image URL without cache-busting parameters for Telegram
             await sendTelegramPhoto(
-                newMetadata.image, 
+                newImageBase, 
                 caption, 
                 config.telegramBotToken, 
                 config.telegramChatId
@@ -102,8 +115,14 @@ async function checkForMetadataChanges(playlistId, newMetadata, token) {
         }
     }
 
-    // Update stored metadata
-    metadata[playlistId] = newMetadata;
+    // Update stored metadata - make sure this is a complete replacement
+    // Store original URLs without cache-busting parameters
+    metadata[playlistId] = { 
+        ...newMetadata,
+        // Store clean image URL
+        image: stripParams(newMetadata.image)
+    };
+    
     fs.writeFileSync(METADATA_FILE, JSON.stringify(metadata, null, 2));
     
     return changed;
