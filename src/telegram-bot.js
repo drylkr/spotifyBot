@@ -237,6 +237,7 @@ bot.command('info', (ctx) => {
     message += `*Followers:* ${escapeMarkdown(playlist.followers?.toString() || "0")}\n`;
     message += `*Public:* ${playlist.public ? "Yes" : "No"}\n`;
     message += `*Owner:* ${escapeMarkdown(playlist.owner?.name || "Unknown")}\n`;
+    message += `*Total Tracks:* ${playlist.track_count || "Unknown"}\n`;
     message += `*Last checked:* ${escapeMarkdown(new Date(playlist.last_checked).toLocaleString())}\n\n`;
     message += `[Open on Spotify](https://open.spotify.com/playlist/${escapeMarkdown(playlistId)})`;
     
