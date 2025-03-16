@@ -74,53 +74,91 @@ async function checkForMetadataChanges(playlistId, newMetadata, token) {
 
     const oldMetadata = metadata[playlistId];
     let changed = false;
-
-    // Log for debugging
-    console.log("Old metadata image:", oldMetadata.image);
-    console.log("New metadata image:", newMetadata.image);
-
-    // Track when image was last checked without modifying URLs
-    newMetadata.imageLastChecked = Date.now();
+    let imageChanged = false;
 
     // Strip any cache-busting parameters from URLs before comparing
     const stripParams = (url) => url ? url.split('?')[0] : url;
     const oldImageBase = stripParams(oldMetadata.image);
     const newImageBase = stripParams(newMetadata.image);
 
-    // Check for metadata changes (using base URLs for images)
-    if (
-        oldMetadata.name !== newMetadata.name ||
-        oldMetadata.description !== newMetadata.description ||
-        oldImageBase !== newImageBase
-    ) {
+    // If snapshot_id is same, playlist hasn't changed (Spotify provides this as a change identifier)
+    // This can help avoid false positives with image URLs
+    const snapshotUnchanged = oldMetadata.snapshot_id === newMetadata.snapshot_id;
+    
+    // Get the image URL without the CDN domain for more reliable comparison
+    // This extracts just the image ID part which should be stable
+    const getImageId = (url) => {
+        if (!url) return null;
+        const match = url.match(/\/image\/([^?]+)/);
+        return match ? match[1] : url;
+    };
+    
+    const oldImageId = getImageId(oldImageBase);
+    const newImageId = getImageId(newImageBase);
+    
+    console.log(`Playlist ${newMetadata.name} - Old image ID: ${oldImageId}`);
+    console.log(`Playlist ${newMetadata.name} - New image ID: ${newImageId}`);
+    console.log(`Snapshot unchanged: ${snapshotUnchanged}`);
+
+    // Track when image was last checked
+    newMetadata.imageLastChecked = Date.now();
+
+    // Check for name or description changes
+    const nameChanged = oldMetadata.name !== newMetadata.name;
+    const descriptionChanged = oldMetadata.description !== newMetadata.description;
+
+    // Only consider image changed if the image ID is different AND
+    // either the snapshot has changed OR it's been at least 24 hours since last check
+    const ONE_DAY = 24 * 60 * 60 * 1000;
+    const timeToForceCheck = !oldMetadata.imageLastChecked || 
+                           (Date.now() - oldMetadata.imageLastChecked > ONE_DAY);
+                           
+    if (oldImageId !== newImageId) {
+        if (!snapshotUnchanged || timeToForceCheck) {
+            console.log(`Image appears to have changed for playlist: ${newMetadata.name}`);
+            imageChanged = true;
+        } else {
+            console.log(`Possible false image change detected, ignoring (same snapshot ID)`);
+        }
+    }
+
+    // If any of the key metadata has changed
+    if (nameChanged || descriptionChanged || imageChanged) {
         changed = true;
         console.log(`Detected metadata changes for playlist: ${newMetadata.name}`);
         
         // Create change notification
-        const message = formatPlaylistChanges(oldMetadata, newMetadata);
+        const message = formatPlaylistChanges(oldMetadata, newMetadata, imageChanged);
         
         // Send notification about changes
         await sendTelegramMessage(message, config.telegramBotToken, config.telegramChatId);
         
-        // If image changed and we have a new image, send it separately
-        if (oldImageBase !== newImageBase && newMetadata.image) {
+        // Only send image separately if we're confident it actually changed
+        if (imageChanged && newMetadata.image) {
             const caption = `New cover image for playlist: *${newMetadata.name}*`;
-            // Send the actual image URL without cache-busting parameters for Telegram
-            await sendTelegramPhoto(
-                newImageBase, 
-                caption, 
-                config.telegramBotToken, 
-                config.telegramChatId
-            );
+            
+            try {
+                // Add a cache-busting parameter to force a fresh fetch
+                const imageUrl = `${newImageBase}?refresh=${Date.now()}`;
+                
+                await sendTelegramPhoto(
+                    imageUrl, 
+                    caption, 
+                    config.telegramBotToken, 
+                    config.telegramChatId
+                );
+            } catch (error) {
+                console.error("Error sending playlist image:", error);
+            }
         }
     }
 
     // Update stored metadata - make sure this is a complete replacement
-    // Store original URLs without cache-busting parameters
     metadata[playlistId] = { 
         ...newMetadata,
-        // Store clean image URL
-        image: stripParams(newMetadata.image)
+        // Store clean image URL and its ID
+        image: stripParams(newMetadata.image),
+        imageId: newImageId
     };
     
     fs.writeFileSync(METADATA_FILE, JSON.stringify(metadata, null, 2));
