@@ -24,7 +24,7 @@ jobs:
         run: npm install
       
       - name: Run playlist tracker
-        run: node src/playlistTracker.js
+        run: node src/playlist-tracker.js
         env:
           SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
           SPOTIFY_CLIENT_SECRET: ${{ secrets.SPOTIFY_CLIENT_SECRET }}
