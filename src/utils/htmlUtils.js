@@ -119,31 +119,26 @@ export function splitMessageBySong(message, maxLength = MAX_MESSAGE_LENGTH) {
 
 // Format playlist metadata changes for notification
 export function formatPlaylistChanges(oldMetadata, newMetadata) {
-    let message = `📝 *Playlist Metadata Updated*\n\n`;
-    message += `*${newMetadata.name}*\n\n`;
-
-     // Format timestamp using getTimestamp from timeUtils
-     const formattedDate = getTimestamp();
-     message += `_Updated on ${formattedDate}_\n\n`;
- 
+    // Use old playlist name in the header
+    let message = `*✿ _${oldMetadata.name}_ updated! ✿*\n\n`;
 
     // Name change
     if (oldMetadata.name !== newMetadata.name) {
-        message += `*Name:*\n"${oldMetadata.name}" ➔ "${newMetadata.name}"\n\n`;
+        message += `Name:\n_${oldMetadata.name}_ ➔ *${newMetadata.name}*\n\n`;
     }
 
     // Description change
     if (oldMetadata.description !== newMetadata.description) {
-        message += `*Description:*\n`;
-        message += oldMetadata.description ? `"${oldMetadata.description}"` : "(empty)";
+        message += `Description:\n`;
+        message += oldMetadata.description ? `_${oldMetadata.description}_` : "(empty)";
         message += ` ➔ `;
-        message += newMetadata.description ? `"${newMetadata.description}"` : "(empty)";
+        message += newMetadata.description ? `*${newMetadata.description}*` : "(empty)";
         message += `\n\n`;
     }
 
     // Image change
     if (oldMetadata.image !== newMetadata.image) {
-        message += `*Cover Image:* Changed\n`;
+        message += `*Image:* Changed\n`;
         
         // Add links to images if available
         if (oldMetadata.image && newMetadata.image) {
