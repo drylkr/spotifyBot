@@ -118,36 +118,27 @@ export function splitMessageBySong(message, maxLength = MAX_MESSAGE_LENGTH) {
 }
 
 // Format playlist metadata changes for notification
-export function formatPlaylistChanges(oldMetadata, newMetadata) {
+export function formatPlaylistChanges(oldMetadata, newMetadata, imageChanged = false) {
     // Use old playlist name in the header
-    let message = `*✿ _${oldMetadata.name}_ updated! ✿*\n\n`;
+    let message = `*— _${oldMetadata.name}_ updated! —*\n\n`;
 
     // Name change
     if (oldMetadata.name !== newMetadata.name) {
-        message += `Name:\n_${oldMetadata.name}_ ➔ *${newMetadata.name}*\n\n`;
+        message += `*Name:*\n${oldMetadata.name} ➔ _${newMetadata.name}_\n\n`;
     }
 
     // Description change
     if (oldMetadata.description !== newMetadata.description) {
-        message += `Description:\n`;
-        message += oldMetadata.description ? `_${oldMetadata.description}_` : "(empty)";
+        message += `*Description:*\n`;
+        message += oldMetadata.description ? `${oldMetadata.description}` : "(empty)";
         message += ` ➔ `;
-        message += newMetadata.description ? `*${newMetadata.description}*` : "(empty)";
+        message += newMetadata.description ? `_${newMetadata.description}_` : "(empty)";
         message += `\n\n`;
     }
 
-    // Image change
-    if (oldMetadata.image !== newMetadata.image) {
-        message += `*Image:* Changed\n`;
-        
-        // Add links to images if available
-        if (oldMetadata.image && newMetadata.image) {
-            message += `[Previous Image](${oldMetadata.image}) ➔ [New Image](${newMetadata.image})\n\n`;
-        } else if (newMetadata.image) {
-            message += `[New Image Added](${newMetadata.image})\n\n`;
-        } else if (oldMetadata.image) {
-            message += `[Image Removed](${oldMetadata.image})\n\n`;
-        }
+    // Image change - only include if we're confident it actually changed
+    if (imageChanged) {
+        message += `*Image:* Changed\n\n`;
     }
 
     // Add link to playlist
