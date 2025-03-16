@@ -1,3 +1,5 @@
+import { getTimestamp } from './timeUtils.js';
+
 // Maximum length for Telegram messages
 export const MAX_MESSAGE_LENGTH = 4000;
 
@@ -120,10 +122,10 @@ export function formatPlaylistChanges(oldMetadata, newMetadata) {
     let message = `📝 *Playlist Metadata Updated*\n\n`;
     message += `*${newMetadata.name}*\n\n`;
 
-    // Format timestamp
-    const date = new Date();
-    const formattedDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
-    message += `_Updated on ${formattedDate}_\n\n`;
+     // Format timestamp using getTimestamp from timeUtils
+     const formattedDate = getTimestamp();
+     message += `_Updated on ${formattedDate}_\n\n`;
+ 
 
     // Name change
     if (oldMetadata.name !== newMetadata.name) {
