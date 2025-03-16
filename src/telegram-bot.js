@@ -18,6 +18,7 @@ const __dirname = path.dirname(__filename);
 
 // Get the path to playlists.json
 const PLAYLISTS_FILE = path.resolve(__dirname, "../data/playlists.json");
+const METADATA_FILE = path.resolve(__dirname, "../data/metadata.json");
 
 // Load playlists from file safely
 function loadPlaylists() {
@@ -39,7 +40,6 @@ function loadPlaylists() {
     }
 }
 
-
 // Save playlists to file
 function savePlaylists(playlists) {
     console.log(`[${getTimestamp()}] Saving playlists to: ${PLAYLISTS_FILE}`);
@@ -47,6 +47,35 @@ function savePlaylists(playlists) {
         fs.writeFileSync(PLAYLISTS_FILE, JSON.stringify({ playlists }, null, 2));
     } catch (error) {
         console.error(`[${getTimestamp()}] ❌ Error saving playlists.json:`, error);
+    }
+}
+
+// Load metadata from file safely
+function loadMetadata() {
+    console.log(`[${getTimestamp()}] Loading metadata from: ${METADATA_FILE}`);
+
+    if (!fs.existsSync(METADATA_FILE)) {
+        console.warn(`[${getTimestamp()}] ⚠️ metadata.json not found, creating default file.`);
+        saveMetadata({}); // Create an empty file
+        return {};
+    }
+
+    try {
+        return JSON.parse(fs.readFileSync(METADATA_FILE, 'utf-8'));
+    } catch (error) {
+        console.error(`[${getTimestamp()}] ❌ Error reading metadata.json:`, error);
+        saveMetadata({}); // Reset file if there's a parsing error
+        return {};
+    }
+}
+
+// Save metadata to file
+function saveMetadata(metadata) {
+    console.log(`[${getTimestamp()}] Saving metadata to: ${METADATA_FILE}`);
+    try {
+        fs.writeFileSync(METADATA_FILE, JSON.stringify(metadata, null, 2));
+    } catch (error) {
+        console.error(`[${getTimestamp()}] ❌ Error saving metadata.json:`, error);
     }
 }
 
@@ -78,18 +107,26 @@ bot.command('set', (ctx) => {
     }
     
     const newPlaylistId = ctx.message.text.split(' ')[1]?.trim();
-    console.log(`[${getTimestamp()}] Received /setplaylist command with ID: ${newPlaylistId}`);
+    console.log(`[${getTimestamp()}] Received /set command with ID: ${newPlaylistId}`);
 
     if (!newPlaylistId) {
-        return ctx.reply('⚠️ Please provide a playlist ID. Example: /setplaylist <playlist_id>');
+        return ctx.reply('⚠️ Please provide a playlist ID. Example: /set <playlist_id>');
     }
 
     const playlists = loadPlaylists();
-    if (playlists.includes(newPlaylistId)) {
+    
+    // Check if playlist already exists
+    const existingPlaylist = playlists.find(playlist => 
+        (typeof playlist === 'string' && playlist === newPlaylistId) || 
+        (typeof playlist === 'object' && playlist.id === newPlaylistId)
+    );
+    
+    if (existingPlaylist) {
         return ctx.reply(`ℹ️ Playlist ${newPlaylistId} is already in the list.`);
     }
 
-    playlists.push(newPlaylistId);
+    // Add new playlist as an object with id
+    playlists.push({ id: newPlaylistId, name: null });
     savePlaylists(playlists);
     ctx.reply(`✅ Playlist ${newPlaylistId} added successfully.`);
 });
@@ -101,24 +138,39 @@ bot.command('delete', (ctx) => {
     }
     
     const playlistIdToRemove = ctx.message.text.split(' ')[1]?.trim();
-    console.log(`[${getTimestamp()}] Received /removeplaylist command with ID: ${playlistIdToRemove}`);
+    console.log(`[${getTimestamp()}] Received /delete command with ID: ${playlistIdToRemove}`);
 
     if (!playlistIdToRemove) {
-        return ctx.reply('⚠️ Please provide a playlist ID. Example: /removeplaylist <playlist_id>');
+        return ctx.reply('⚠️ Please provide a playlist ID. Example: /delete <playlist_id>');
     }
 
     const playlists = loadPlaylists();
-    const index = playlists.indexOf(playlistIdToRemove);
+    
+    // Find playlist index regardless of whether it's a string or object
+    const index = playlists.findIndex(playlist => 
+        (typeof playlist === 'string' && playlist === playlistIdToRemove) || 
+        (typeof playlist === 'object' && playlist.id === playlistIdToRemove)
+    );
+    
     if (index === -1) {
         return ctx.reply(`ℹ️ Playlist ${playlistIdToRemove} is not in the list.`);
     }
 
+    // Remove playlist
     playlists.splice(index, 1);
     savePlaylists(playlists);
+    
+    // Also remove from metadata if it exists
+    const metadata = loadMetadata();
+    if (metadata[playlistIdToRemove]) {
+        delete metadata[playlistIdToRemove];
+        saveMetadata(metadata);
+    }
+    
     ctx.reply(`✅ Playlist ${playlistIdToRemove} removed successfully.`);
 });
 
-// list playlists
+// List playlists with metadata
 bot.command('list', (ctx) => {
     if (ctx.chat.id.toString() !== process.env.TELEGRAM_CHAT_ID) {
         return ctx.reply('❌ Unauthorized.');
@@ -129,17 +181,81 @@ bot.command('list', (ctx) => {
         return ctx.reply('ℹ️ No playlists are currently being tracked.');
     }
 
-    // Escape playlist names and IDs properly
-    const formattedList = playlists
-        .map((playlist) => `\\-\\ *${escapeMarkdown(playlist.name || "Unknown Playlist")}*\n  \`${escapeMarkdown(playlist.id)}\``)
-        .join("\n\n");
+    const metadata = loadMetadata();
+
+    // Format playlist list with enhanced metadata
+    const formattedList = playlists.map(playlist => {
+        // Get ID regardless of playlist format
+        const id = typeof playlist === 'string' ? playlist : playlist.id;
+        
+        // Get name from playlist object or metadata
+        let name = "Unknown Playlist";
+        if (typeof playlist === 'object' && playlist.name) {
+            name = playlist.name;
+        } else if (metadata[id] && metadata[id].name) {
+            name = metadata[id].name;
+        }
+        
+        // Get followers if available
+        let followersText = "";
+        if (metadata[id] && metadata[id].followers) {
+            followersText = `\\(${escapeMarkdown(metadata[id].followers.toString())} followers\\)`;
+        }
+        
+        return `\\-\\ *${escapeMarkdown(name)}* ${followersText}\n  \`${escapeMarkdown(id)}\``;
+    }).join("\n\n");
 
     const message = `📌 *Tracked Playlists:*\n\n${formattedList}`;
 
     ctx.reply(message, { parse_mode: "MarkdownV2" });
 });
 
-
+// Command: View playlist metadata
+bot.command('info', (ctx) => {
+    if (ctx.chat.id.toString() !== process.env.TELEGRAM_CHAT_ID) {
+        return ctx.reply('❌ Unauthorized.');
+    }
+    
+    const playlistId = ctx.message.text.split(' ')[1]?.trim();
+    
+    if (!playlistId) {
+        return ctx.reply('⚠️ Please provide a playlist ID. Example: /info <playlist_id>');
+    }
+    
+    const metadata = loadMetadata();
+    
+    if (!metadata[playlistId]) {
+        return ctx.reply(`ℹ️ No metadata found for playlist ${playlistId}.`);
+    }
+    
+    const playlist = metadata[playlistId];
+    
+    // Format metadata as a nice message
+    let message = `*Playlist Information*\n\n`;
+    message += `*Name:* ${escapeMarkdown(playlist.name || "Unknown")}\n`;
+    message += `*Description:* ${escapeMarkdown(playlist.description || "None")}\n`;
+    message += `*Followers:* ${escapeMarkdown(playlist.followers?.toString() || "0")}\n`;
+    message += `*Public:* ${playlist.public ? "Yes" : "No"}\n`;
+    message += `*Owner:* ${escapeMarkdown(playlist.owner?.name || "Unknown")}\n`;
+    message += `*Last checked:* ${escapeMarkdown(new Date(playlist.last_checked).toLocaleString())}\n\n`;
+    message += `[Open on Spotify](https://open.spotify.com/playlist/${escapeMarkdown(playlistId)})`;
+    
+    // Send the message with the image if available
+    if (playlist.image) {
+        ctx.replyWithPhoto(
+            { url: playlist.image },
+            { 
+                caption: message,
+                parse_mode: "MarkdownV2"
+            }
+        ).catch(err => {
+            console.error(`[${getTimestamp()}] ❌ Error sending photo:`, err);
+            ctx.reply(message, { parse_mode: "MarkdownV2" });
+        });
+    } else {
+        ctx.reply(message, { parse_mode: "MarkdownV2" });
+    }
+});
 
 // Start the bot
 bot.launch();
