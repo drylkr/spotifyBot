@@ -16,7 +16,7 @@ const bot = new Telegraf(process.env.TELEGRAM_BOT_TOKEN);
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Get the path to playlists.json
+// Get the path to json files
 const PLAYLISTS_FILE = path.resolve(__dirname, "../data/playlists.json");
 const METADATA_FILE = path.resolve(__dirname, "../data/metadata.json");
 
@@ -35,7 +35,7 @@ function loadPlaylists() {
         return playlistsData.playlists || [];
     } catch (error) {
         console.error(`[${getTimestamp()}] ❌ Error reading playlists.json:`, error);
-        savePlaylists([]); // Reset file if there's a parsing error
+        savePlaylists([]); 
         return [];
     }
 }
@@ -56,7 +56,7 @@ function loadMetadata() {
 
     if (!fs.existsSync(METADATA_FILE)) {
         console.warn(`[${getTimestamp()}] ⚠️ metadata.json not found, creating default file.`);
-        saveMetadata({}); // Create an empty file
+        saveMetadata({}); 
         return {};
     }
 
@@ -64,7 +64,7 @@ function loadMetadata() {
         return JSON.parse(fs.readFileSync(METADATA_FILE, 'utf-8'));
     } catch (error) {
         console.error(`[${getTimestamp()}] ❌ Error reading metadata.json:`, error);
-        saveMetadata({}); // Reset file if there's a parsing error
+        saveMetadata({}); 
         return {};
     }
 }
@@ -196,7 +196,6 @@ bot.command('list', (ctx) => {
             name = metadata[id].name;
         }
         
-        // Get followers if available
         let followersText = "";
         if (metadata[id] && metadata[id].followers) {
             followersText = `\\(${escapeMarkdown(metadata[id].followers.toString())} followers\\)`;
@@ -230,7 +229,7 @@ bot.command('info', (ctx) => {
     
     const playlist = metadata[playlistId];
     
-    // Format metadata as a nice message
+    // Format metadata as message
     let message = `*Playlist Information*\n\n`;
     message += `*Name:* ${escapeMarkdown(playlist.name || "Unknown")}\n`;
     message += `*Description:* ${escapeMarkdown(playlist.description || "None")}\n`;
@@ -262,7 +261,7 @@ bot.command('info', (ctx) => {
 bot.launch();
 console.log(`[${getTimestamp()}] 🚀 Telegram bot started.`);
 
-// Graceful shutdown handling
+// Shutdown handling
 process.once('SIGINT', () => {
     console.log(`[${getTimestamp()}] 🛑 Stopping bot (SIGINT)...`);
     bot.stop('SIGINT');
