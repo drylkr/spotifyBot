@@ -64,7 +64,6 @@ async function checkForMetadataChanges(playlistId, newMetadata, token) {
         fs.writeFileSync(METADATA_FILE, JSON.stringify(metadata, null, 2));
     }
 
-    // If we don't have stored metadata for this playlist, store it and return
     if (!metadata[playlistId]) {
         metadata[playlistId] = newMetadata;
         fs.writeFileSync(METADATA_FILE, JSON.stringify(metadata, null, 2));
@@ -76,17 +75,12 @@ async function checkForMetadataChanges(playlistId, newMetadata, token) {
     let changed = false;
     let imageChanged = false;
 
-    // Strip any cache-busting parameters from URLs before comparing
     const stripParams = (url) => url ? url.split('?')[0] : url;
     const oldImageBase = stripParams(oldMetadata.image);
     const newImageBase = stripParams(newMetadata.image);
 
-    // If snapshot_id is same, playlist hasn't changed (Spotify provides this as a change identifier)
-    // This can help avoid false positives with image URLs
     const snapshotUnchanged = oldMetadata.snapshot_id === newMetadata.snapshot_id;
     
-    // Get the image URL without the CDN domain for more reliable comparison
-    // This extracts just the image ID part which should be stable
     const getImageId = (url) => {
         if (!url) return null;
         const match = url.match(/\/image\/([^?]+)/);
@@ -100,15 +94,12 @@ async function checkForMetadataChanges(playlistId, newMetadata, token) {
     console.log(`Playlist ${newMetadata.name} - New image ID: ${newImageId}`);
     console.log(`Snapshot unchanged: ${snapshotUnchanged}`);
 
-    // Track when image was last checked
     newMetadata.imageLastChecked = Date.now();
 
     // Check for name or description changes
     const nameChanged = oldMetadata.name !== newMetadata.name;
     const descriptionChanged = oldMetadata.description !== newMetadata.description;
 
-    // Only consider image changed if the image ID is different AND
-    // either the snapshot has changed OR it's been at least 24 hours since last check
     const ONE_DAY = 24 * 60 * 60 * 1000;
     const timeToForceCheck = !oldMetadata.imageLastChecked || 
                            (Date.now() - oldMetadata.imageLastChecked > ONE_DAY);
@@ -138,7 +129,6 @@ async function checkForMetadataChanges(playlistId, newMetadata, token) {
             const caption = `New cover image for playlist: *${newMetadata.name}*`;
             
             try {
-                // Add a cache-busting parameter to force a fresh fetch
                 const imageUrl = `${newImageBase}?refresh=${Date.now()}`;
                 
                 await sendTelegramPhoto(
@@ -156,7 +146,6 @@ async function checkForMetadataChanges(playlistId, newMetadata, token) {
     // Update stored metadata - make sure this is a complete replacement
     metadata[playlistId] = { 
         ...newMetadata,
-        // Store clean image URL and its ID
         image: stripParams(newMetadata.image),
         imageId: newImageId
     };
@@ -180,7 +169,6 @@ async function checkForSongChanges() {
     for (let i = 0; i < playlists.length; i++) {
         let playlist = playlists[i];
 
-        // If playlist is stored as an ID string, convert it to an object
         if (typeof playlist === "string") {
             playlist = { id: playlist, name: null }; // Set name as null initially
         }
@@ -201,13 +189,11 @@ async function checkForSongChanges() {
             console.log(`Updated playlist: ${playlist.id} -> ${playlist.name}`);
         }
 
-        // Update the array with the modified object
         playlists[i] = playlist;
         
         // Ensure songs file exists
         let storedSongs = ensureFileExists(SONGS_FILE, {});
 
-        // Ensure playlist exists in storedSongs with the proper structure
         if (!storedSongs[playlist.id] || typeof storedSongs[playlist.id] !== 'object') {
             storedSongs[playlist.id] = { ids: [], trackDetails: {} };
         }
@@ -218,7 +204,6 @@ async function checkForSongChanges() {
         
         const trackIds = tracks.map((track) => track.id);
 
-        // Find removed songs BEFORE updating stored details
         const removedTrackIds = storedSongs[playlist.id].ids.filter(
             (songId) => !trackIds.includes(songId),
         );
@@ -260,7 +245,6 @@ async function checkForSongChanges() {
             };
         });
 
-        // Replace the entire trackDetails object with our cleaned version
         storedSongs[playlist.id].trackDetails = cleanedTrackDetails;
 
         // Find new songs
@@ -306,7 +290,6 @@ async function checkForSongChanges() {
 
 // Main function to be called from GitHub Actions
 export async function runPlaylistTracker() {    
-    // Validate configuration
     const missingEnvVars = Object.keys(config).filter((key) => !config[key]);
     
     if (missingEnvVars.length > 0) {
@@ -317,7 +300,6 @@ export async function runPlaylistTracker() {
     return await checkForSongChanges();
 }
 
-// Allow direct execution
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
     runPlaylistTracker()
         .then(() => console.log("Playlist checking completed"))
