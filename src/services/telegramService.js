@@ -10,15 +10,12 @@ export async function sendTelegramMessage(message, telegramToken, telegramChatId
     const url = `https://api.telegram.org/bot${telegramToken}/sendMessage`;
 
     try {
-        // First split the message into chunks to ensure we don't break song groups
+        // Split message into chunks to ensure we don't break song groups
         const rawChunks = splitMessageBySong(message, MAX_MESSAGE_LENGTH);
         
-        // Process each chunk individually
         for (const [index, chunk] of rawChunks.entries()) {
-            // Process Spotify links in this chunk
             let processedChunk = processSpotifyLinks(chunk);
             
-            // Remove any existing backslashes that might be escaping characters
             processedChunk = processedChunk.replace(/\\([()[\]*.!_~])/g, '$1');
             
             // Format as HTML
@@ -87,7 +84,6 @@ export async function sendTelegramPhoto(photoUrl, caption, telegramToken, telegr
     } catch (error) {
         console.error("Error sending Telegram photo:", error.response?.data || error.message);
         
-        // Fallback to message with link
         try {
             const message = `${caption}\n\n[View Image](${photoUrl})`;
             await sendTelegramMessage(message, telegramToken, telegramChatId);
