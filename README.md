@@ -1,6 +1,7 @@
 # Spotify Playlist Tracker  
 
-A bot that tracks changes in Spotify playlists and sends updates via Telegram.  
+A bot that tracks Spotify playlist changes, sending updates via Telegram.
+
 
 ## Features  
 - Detects song additions/removals in playlists
@@ -16,7 +17,7 @@ A bot that tracks changes in Spotify playlists and sends updates via Telegram.
    - `TELEGRAM_BOT_TOKEN`  
    - `TELEGRAM_CHAT_ID`
 4. Add playlists to track in data/playlists.json (ID & name)
-5. Run automatically with GitHub Actions
+6. Run automatically with GitHub Actions
 
 ## Playlist JSON Format
 - Add playlists in data/playlists.json:
@@ -39,17 +40,14 @@ A bot that tracks changes in Spotify playlists and sends updates via Telegram.
 - Runs every 12 minutes via GitHub Actions  
 
 ---
-💡 **Made for tracking playlist updates effortlessly!**  
+💡 **Made for tracking playlist updates effortlessly!** 
 
-![image](https://github.com/user-attachments/assets/f4392a6d-92b6-4879-b794-293882a5fda4)
 
-![image](https://github.com/user-attachments/assets/f1f4896c-8269-4310-acf3-a9c930723c1e)
-
-![image](https://github.com/user-attachments/assets/65b95fb5-e3a4-4b5f-ba29-20c2b1506d6c)
-
-![image](https://github.com/user-attachments/assets/ca7b81be-cf74-42bc-a83c-f431f2e200fe)
-
-![image](https://github.com/user-attachments/assets/a949e0e9-9895-4419-a0e0-25211be5377f)
+<img width="1831" height="930" alt="spotify-1" src="https://github.com/user-attachments/assets/053ee967-8556-413b-b8a0-531e116f32c8" />
+<img width="1832" height="990" alt="spotify-2" src="https://github.com/user-attachments/assets/f8fb25f8-365f-447f-9624-879b22bb22be" />
+<img width="1834" height="863" alt="spotify-4" src="https://github.com/user-attachments/assets/1cfaeabc-e570-4e44-b92b-dfe80ad1a5c8" />
+<img width="1828" height="927" alt="spotify-3" src="https://github.com/user-attachments/assets/304874c2-f961-4027-8725-af806919b240" />
+<img width="1829" height="934" alt="spotify-5" src="https://github.com/user-attachments/assets/e6f6668b-11d7-477b-a25c-d9d92b43b495" />
 
 
 
